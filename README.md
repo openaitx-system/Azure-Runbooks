@@ -34,6 +34,7 @@ Azure-Runbooks/
 ├── Report-DeviceSyncOverdue/       # Report on devices overdue for sync
 ├── Report-OneDriveSharedItems/     # Generate reports of shared items in OneDrive
 ├── Task-SetCompanyAttribute/       # Set company attribute for all users
+├── Snipe-IT-UserSync/              # Sync Microsoft 365 users to Snipe-IT users
 ```
 
 Each runbook folder contains:
@@ -85,6 +86,7 @@ Each runbook includes detailed documentation for implementation and usage. In ge
 
 ### User Management
 - **Company Attribute Setting**: Set a consistent company attribute across all user accounts in your Microsoft 365 tenant.
+- **Snipe-IT User Sync**: Create or update Snipe-IT users from your Microsoft 365 tenant, using email as the anchor, with secure passwords for new users and optional login/invite toggles.
 
 ## Branch Management
 
