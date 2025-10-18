@@ -258,7 +258,7 @@ All operations are logged with timestamps and severity levels (INFO, WARNING, ER
 
 ## Version History
 
-- **2.0** (October 2025) - Azure Automation runbook version
+- **1.0** (October 2025) - Azure Automation runbook version
   - Uses PSAction1 module for custom attribute updates
   - Managed Identity authentication for Microsoft Graph
   - Automation Variables for Action1 credentials

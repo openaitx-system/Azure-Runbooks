@@ -1,7 +1,7 @@
 # Azure-Runbooks 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1+-blue.svg)](https://github.com/PowerShell/PowerShell)
+[![PowerShell](https://img.shields.io/badge/PowerShell-7.2+-blue.svg)](https://github.com/PowerShell/PowerShell)
 [![Microsoft 365](https://img.shields.io/badge/Microsoft_365-compatible-brightgreen.svg)](https://www.microsoft.com/microsoft-365)
 [![Graph API](https://img.shields.io/badge/Microsoft_Graph-v1.0-blue.svg)](https://developer.microsoft.com/en-us/graph)
 [![Azure](https://img.shields.io/badge/Azure_Automation-compatible-0089D6.svg)](https://azure.microsoft.com/en-us/products/automation)
@@ -35,6 +35,7 @@ Azure-Runbooks/
 ├── Report-OneDriveSharedItems/     # Generate reports of shared items in OneDrive
 ├── Task-SetCompanyAttribute/       # Set company attribute for all users
 ├── Snipe-IT-UserSync/              # Sync Microsoft 365 users to Snipe-IT users
+├── Sync-IntuneToAction1Categories/ # Sync Intune device categories to Action1 custom attributes
 ```
 
 Each runbook folder contains:
@@ -54,39 +55,35 @@ Each runbook includes detailed documentation for implementation and usage. In ge
 2. Enable System-Assigned Managed Identity on your Automation account
 3. Use the included `Add-GraphPermissions.ps1` script to assign necessary Graph API permissions
 4. Configure any required parameters specific to your environment
-5. Create a schedule or link to a webhook for execution
-6. Review logs and output after execution
+5. Schedule the runbook or run it on-demand as needed
 
-## Requirements
-
-- Azure Automation account
-- Appropriate Microsoft Graph API permissions (varies by runbook)
-- Required PowerShell modules (specified in each runbook's documentation)
-- Pre-configured Azure Automation variables (if specified in a runbook)
-
-## Available Solutions
-
-### Device Management
-- **Device Category Sync**: Automatically update Intune device categories based on the primary user's department.
-- **Autopilot Group Tag Sync**: Synchronize Windows Autopilot device group tags with their corresponding Intune device categories.
-- **Device Sync Reminder**: Identify devices that haven't synced in a specified period and send email notifications to their primary users.
-- **Intune Device Sync**: Force synchronize all devices in your Intune environment with batch processing and throttling protection.
-- **Device Sync Overdue Report**: Generate comprehensive reports of devices overdue for sync and store them in Azure Blob Storage.
-
-### Security and Compliance
-- **Intune Apple Token Monitor**: Monitor expiration dates of Apple Push Notification certificates, VPP tokens, and DEP tokens in Microsoft Intune and send proactive alerts through Microsoft Teams.
-- **Missing Security Updates Report**: Generate reports of Windows devices missing multiple security updates from Log Analytics data and upload them to SharePoint.
-- **OneDrive Shared Items Report**: Scan a user's OneDrive for shared items and generate comprehensive reports for security and compliance purposes.
+## Available Runbooks
 
 ### Reporting
-- **Discovered Apps Report**: Generate comprehensive reports of all applications discovered across your managed devices.
-- **Device Compliance Report**: Create detailed reports on device compliance status.
+- **Device Compliance Report**: Generate comprehensive compliance reports for Intune-managed devices.
+- **Discovered Apps Report**: Create detailed reports of applications discovered on managed devices.
 - **Devices with Specific App Report**: Identify all devices with a specific application installed.
 - **User Managers Report**: Generate a report of all licensed internal users along with their manager information.
+- **Missing Security Updates Report**: Identify Windows devices missing multiple security updates with automated reporting.
+- **Device Sync Overdue Report**: Generate reports of devices that haven't synced within a specified threshold.
+- **OneDrive Shared Items Report**: Create reports of items shared externally in OneDrive for Business.
+
+### Device Management
+- **Device Category Sync**: Automatically synchronize Intune device categories based on user department information.
+- **Autopilot Group Tag Sync**: Keep Autopilot device group tags in sync with Intune device categories.
+- **Force Device Sync**: Initiate sync commands for all managed Intune devices with batching and throttling protection.
+- **Intune to Action1 Category Sync**: Sync Intune device categories to Action1 custom attributes by matching serial numbers.
+
+### Alerts and Notifications
+- **Device Sync Reminder**: Send automated email reminders to users whose devices haven't synced recently.
+- **Apple Token Monitor**: Monitor and alert on Apple Push Notification certificate and token expirations.
 
 ### User Management
 - **Company Attribute Setting**: Set a consistent company attribute across all user accounts in your Microsoft 365 tenant.
 - **Snipe-IT User Sync**: Create or update Snipe-IT users from your Microsoft 365 tenant, using email as the anchor, with secure passwords for new users and optional login/invite toggles.
+
+### Third-Party Integration
+- **Action1 Integration**: Sync Intune device categories to Action1 RMM custom attributes for unified device management across platforms.
 
 ## Branch Management
 
@@ -98,6 +95,21 @@ This repository follows a simplified Git workflow:
 - For users who have cloned this repository, note that development branches may disappear after their work is completed
 
 If you're working with a specific development branch, consider creating your own fork to ensure your work isn't affected when branches are deleted.
+
+## What's New in v1.4.0
+
+### New Runbook: Sync-IntuneToAction1Categories
+This release introduces a new integration with Action1 RMM, enabling automated synchronization of Intune device categories to Action1 custom attributes. Key features include:
+
+- Automatic matching of devices between Intune and Action1 using serial numbers
+- Syncs Intune device categories to configurable Action1 custom attributes
+- Supports multiple Action1 regions (North America, Europe, Australia)
+- Secure credential management through Azure Automation encrypted variables
+- WhatIf mode for testing without making changes
+- Comprehensive logging and statistics
+- Built on the PSAction1 PowerShell module
+
+This integration helps organizations maintain consistent device categorization across both Microsoft Intune and Action1 RMM platforms, enabling better reporting, policy application, and device management workflows.
 
 ## Discussions
 
